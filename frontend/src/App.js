@@ -8,6 +8,8 @@ import EditEventPage from './components/EditEventPage';
 import EventDetailPage from './components/EventDetailPage';
 import EventRootLayout from './components/EventRootLayout';
 
+import { loader as eventsLoader } from './components/EventsPage';
+
 
 // Challenge / Exercise
 
@@ -38,17 +40,7 @@ const router = createBrowserRouter([
         
         {path: 'events', element: <EventRootLayout />,
         children: [
-			{index: true, element: <EventsPage />, loader: async () => {
-				const response = await fetch('http://localhost:8081/events');
-
-				if(!response.ok) {
-
-				}
-				else {
-					const data = await response.json();
-					return data.events;			// returned value in loader can be accessable in other components
-				} 
-			}},
+			{index: true, element: <EventsPage />, loader: eventsLoader},
 			{path: 'new', element: <NewEventPage />},
 			{path: ':id/edit', element: <EditEventPage />},
 			{path: ':id', element: <EventDetailPage />}	

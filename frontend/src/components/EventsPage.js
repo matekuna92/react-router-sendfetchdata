@@ -15,3 +15,15 @@ const EventsPage = () => {
 }
 
 export default EventsPage;
+
+export const loader = async () => {
+    const response = await fetch('http://localhost:8081/events');
+
+    if(!response.ok) {
+
+    }
+    else {
+        const data = await response.json();
+        return data.events;			// returned value in loader can be accessable in other components
+    } 
+}
