@@ -1,44 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
-const DUMMY_EVENTS = [
-    {
-        "id": "e1",
-        "title": "A dummy event",
-        "date": "2023-02-22",
-        "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-        "description": "Join this amazing event and connect with fellow developers."
-      },
-      {
-        "id": "e2",
-        "title": "Another dummy event",
-        "date": "2023-02-30",
-        "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-        "description": "Join this amazing event 2 and connect with fellow developers."
-      },
-      {
-        "id": "e3",
-        "title": "One more dummy event",
-        "date": "2023-03-03",
-        "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-        "description": "Join this amazing event 3 and connect with fellow developers."
-      }
-]
+import EventsList from './EventsList';
 
 const EventsPage = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [fetchedEvents, setFetchedEvents] = useState();
+    const [error, setError] = useState();
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            setIsLoading(true);
+            const response = await fetch('http://localhost:8081/events');
+
+            if(!response.ok) {
+                setError('Data fetch failed');
+            }
+            else {
+                const data = await response.json();
+                console.log(data);
+                setFetchedEvents(data.events);
+            } 
+
+            setIsLoading(false);
+        }
+
+        fetchEvents();
+    }, []);
+
     return (
         <>
             <div>Events Page</div>
-            <ul>
-                {DUMMY_EVENTS.map(event => (
-                    <Link to={event.id}>
-                        <li 
-                            key={event.id}>
-                            {event.title}
-                        </li>
-                    </Link>
-                ))}
-            </ul>
+            <div>
+                {isLoading && <p> Loading data... </p>}
+                {error && <p> {error} </p>}
+            </div>
+            {!isLoading && fetchedEvents && <EventsList events={fetchedEvents} />}
+        
         </>
     );
 }
