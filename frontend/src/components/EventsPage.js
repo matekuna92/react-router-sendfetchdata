@@ -3,8 +3,9 @@ import { useLoaderData } from 'react-router-dom';
 import EventsList from './EventsList';
 
 const EventsPage = () => {
-    const events = useLoaderData();     // events will be the data returned in app js loader. useLoader can access the 'closest' loader data
-
+    const data = useLoaderData();     // events will be the data returned in app js loader. useLoader can access the 'closest' loader data
+    const events = data.events;
+    
     return (
         <>
             <div>Events Page</div>
@@ -23,7 +24,8 @@ export const loader = async () => {
 
     }
     else {
-        const data = await response.json();
-        return data.events;			// returned value in loader can be accessable in other components
+      //  const data = await response.json();
+      //  return data.events;			// returned value in loader can be accessable in other components
+         return response;         // react-router supports returning the response without extracting manually
     } 
 }

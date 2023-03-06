@@ -5,13 +5,13 @@ import { Outlet, useNavigation } from "react-router-dom";
 
 
 const RootLayout = () => {
-    const navigation = useNavigation();
+   // const navigation = useNavigation();
 
     return (
         <>
             <MainNavigation />
             <main>
-                {navigation.state === 'loading' && <p>Data is loading...</p>}
+                {/* {navigation.state === 'loading' && <p>Data is loading...</p>} */}
                 <Outlet />
             </main>
         </>
