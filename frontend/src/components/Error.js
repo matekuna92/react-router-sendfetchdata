@@ -13,7 +13,7 @@ const Error = () => {
     console.log('error status:', error.status);
     console.log('error data: ', error.data);
 
-    if(error.status === 200) {
+    if(error.status === 500) {
         errorMessage = JSON.parse(error.data).message;      // error.date gives access to the data returned in EventsPage Response
     }
 

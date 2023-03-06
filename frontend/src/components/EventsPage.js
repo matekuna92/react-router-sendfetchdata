@@ -22,13 +22,13 @@ const EventsPage = () => {
 export default EventsPage;
 
 export const loader = async () => {
-    const response = await fetch('http://localhost:8081/evets');
+    const response = await fetch('http://localhost:8081/eventsasdasd');
 
     if(!response.ok) {
        // return {isError: true, message: 'Could not fetch events.'};
        // when error is thrown inside loader, it uses the closest errorElement from routes in App js*
       // throw new Error('Could not fetch events.');
-      throw new Response(JSON.stringify({ message: 'Could not fetch events.'}, { status: 200 }));
+      throw new Response(JSON.stringify({ message: 'Could not fetch events.'}), { status: 500 });
     }
     else {
       //  const data = await response.json();
