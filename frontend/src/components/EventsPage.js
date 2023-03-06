@@ -5,6 +5,10 @@ import EventsList from './EventsList';
 const EventsPage = () => {
     const data = useLoaderData();     // events will be the data returned in app js loader. useLoader can access the 'closest' loader data
     const events = data.events;
+
+   /*  if(data.isError) {
+        return <p> {data.message} </p>
+    } */
     
     return (
         <>
@@ -21,7 +25,9 @@ export const loader = async () => {
     const response = await fetch('http://localhost:8081/events');
 
     if(!response.ok) {
-
+       // return {isError: true, message: 'Could not fetch events.'};
+       // when error is thrown inside loader, it uses the closest errorElement from routes in App js*
+       throw new Error('Could not fetch events.');
     }
     else {
       //  const data = await response.json();

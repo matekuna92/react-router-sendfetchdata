@@ -8,6 +8,7 @@ import NewEventPage from './components/NewEventPage';
 import EditEventPage from './components/EditEventPage';
 import EventDetailPage from './components/EventDetailPage';
 import EventRootLayout from './components/EventRootLayout';
+import Error from './components/Error';
 
 import { loader as eventsLoader } from './components/EventsPage';
 
@@ -34,8 +35,12 @@ import { loader as eventsLoader } from './components/EventsPage';
 // 7. Output the ID of the selected event on the EventDetailPage
 // BONUS: Add another (nested) layout route that adds the <EventNavigation> component above all /events... page components
 
+// * Error page will be displayed any time an error occurs in anywhere in any routes 
+//errorElement when error is thrown in EventsPage loader - if errorElement is added inside events children, then
+// that's the closest errorElement which will be displayed
 const router = createBrowserRouter([
     {path: '/', element: <RootLayout />,
+    errorElement: <Error />,
     children: [
         {index: true, element: <HomePage />},
         
