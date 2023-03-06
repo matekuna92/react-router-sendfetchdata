@@ -11,6 +11,7 @@ import EventRootLayout from './components/EventRootLayout';
 import Error from './components/Error';
 
 import { loader as eventsLoader } from './components/EventsPage';
+import { loader as eventDetailLoader } from './components/EventDetailPage';
 
 
 // Challenge / Exercise
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
 			{index: true, element: <EventsPage />, loader: eventsLoader},
 			{path: 'new', element: <NewEventPage />},
 			{path: ':id/edit', element: <EditEventPage />},
-			{path: ':id', element: <EventDetailPage />}	
+			{path: ':id', element: <EventDetailPage />, loader: eventDetailLoader}	
         ]}
     ]}
 ]);

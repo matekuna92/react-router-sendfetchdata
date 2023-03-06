@@ -3,6 +3,8 @@ import React from 'react';
 import { useRouteError } from 'react-router-dom';
 
 import PageContent from './PageContent';
+import EventsNavigation from './EventsNavigation';
+import MainNavigation from './MainNavigation';
 
 const Error = () => {
     const error = useRouteError();
@@ -11,7 +13,7 @@ const Error = () => {
     let errorMessage = 'Something went wrong!';
 
     console.log('error status:', error.status);
-    console.log('error data: ', error.data);
+    console.log('error data: ', error.data.message);
 
     if(error.status === 500) {
         errorMessage = JSON.parse(error.data).message;      // error.date gives access to the data returned in EventsPage Response
@@ -22,9 +24,14 @@ const Error = () => {
         errorMessage = '404. Could not find page.';
     }
 
-    return <PageContent message={message}>
-        <p> {errorMessage} </p>
-    </PageContent>;
+    return (
+        <>
+            <MainNavigation />
+            <PageContent message={message}>
+                <p> {errorMessage} </p>
+            </PageContent>
+        </>
+    );
 }
 
 export default Error;

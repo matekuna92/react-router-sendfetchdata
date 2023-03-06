@@ -3,7 +3,8 @@ import { useLoaderData } from 'react-router-dom';
 import EventsList from './EventsList';
 
 const EventsPage = () => {
-    const data = useLoaderData();     // events will be the data returned in app js loader. useLoader can access the 'closest' loader data
+    const data = useLoaderData();     // events will be the data returned in app js loader. (data returned by loader function in this component, it was moved from app js)
+    //useLoader can access the 'closest' loader data
     const events = data.events;
 
    /*  if(data.isError) {
@@ -22,7 +23,7 @@ const EventsPage = () => {
 export default EventsPage;
 
 export const loader = async () => {
-    const response = await fetch('http://localhost:8081/eventsasdasd');
+    const response = await fetch('http://localhost:8081/events');
 
     if(!response.ok) {
        // return {isError: true, message: 'Could not fetch events.'};
