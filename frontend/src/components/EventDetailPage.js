@@ -22,9 +22,10 @@ export const loader = async ({ request, params }) => {
 
     console.log('request:', request);
     console.log('params:', params);
+    console.log('response:', response);
 
     if(!response.ok) {
-        throw new Error({ message: JSON.stringify('Could not fetch data for selected event.') }, { status: 500});
+        throw new Error({ message: JSON.stringify('Could not fetch data for selected event.') }, { status: 500 });
     }
     else {
         return response;
