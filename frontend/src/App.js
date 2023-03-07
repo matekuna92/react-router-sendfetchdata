@@ -51,7 +51,7 @@ const router = createBrowserRouter([
 			{path: 'new', element: <NewEventPage />},
 			// Edit page needs the same event data as detail page. Make the 2 routes as children of id route,
 			// so no need to write another loader function, loader can be used in all child routes
-      		{path: ':id', loader: eventDetailLoader,
+      		{path: ':id', id: 'event-detail', loader: eventDetailLoader,
 			children: [
 				{index: true, element: <EventDetailPage />},
 				{path: 'edit', element: <EditEventPage />}
