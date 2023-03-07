@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
@@ -10,8 +10,9 @@ function EventForm({ method, event }) {
     navigate('..');
   }
 
+  // react-router Form behaves like form, but sending date to our action instead of the backend, so action can process the data
   return (
-    <form className={classes.form}>
+    <Form method='POST' className={classes.form}>
       <p>
         <label htmlFor="title">Title</label>
         <input id="title" type="text" name="title" required defaultValue={event ? event.title : ''} />
@@ -34,7 +35,7 @@ function EventForm({ method, event }) {
         </button>
         <button>Save</button>
       </div>
-    </form>
+    </Form>
   );
 }
 

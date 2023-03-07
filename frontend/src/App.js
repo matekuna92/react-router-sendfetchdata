@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import EventsPage from './components/EventsPage';
 import HomePage from './components/HomePage';
 import RootLayout from './components/RootLayout';
-import NewEventPage from './components/NewEventPage';
+import NewEventPage, { action as newEventAction } from './components/NewEventPage';
 import EditEventPage from './components/EditEventPage';
 import EventDetailPage from './components/EventDetailPage';
 import EventRootLayout from './components/EventRootLayout';
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         {path: 'events', element: <EventRootLayout />,
         children: [
 			{index: true, element: <EventsPage />, loader: eventsLoader},
-			{path: 'new', element: <NewEventPage />},
+			{path: 'new', element: <NewEventPage />, action: newEventAction},
 			// Edit page needs the same event data as detail page. Make the 2 routes as children of id route,
 			// so no need to write another loader function, loader can be used in all child routes
       		{path: ':id', id: 'event-detail', loader: eventDetailLoader,
