@@ -3,8 +3,6 @@ import { redirect } from 'react-router-dom';
 import EventForm from './EventForm';
 
 const NewEventPage = () => {
-
-
     return <EventForm />
 }
 

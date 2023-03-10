@@ -12,6 +12,7 @@ import Error from './components/Error';
 
 import { loader as eventsLoader } from './components/EventsPage';
 import { loader as eventDetailLoader } from './components/EventDetailPage';
+import { action as eventDeleteAction } from './components/EventDetailPage';
 
 
 // Challenge / Exercise
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
 			// so no need to write another loader function, loader can be used in all child routes
       		{path: ':id', id: 'event-detail', loader: eventDetailLoader,
 			children: [
-				{index: true, element: <EventDetailPage />},
+				{index: true, element: <EventDetailPage />, action: eventDeleteAction},
 				{path: 'edit', element: <EditEventPage />}
 			]}
         ]}
