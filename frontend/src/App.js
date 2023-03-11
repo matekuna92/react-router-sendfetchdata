@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import EventsPage from './components/EventsPage';
 import HomePage from './components/HomePage';
 import RootLayout from './components/RootLayout';
-import NewEventPage, { action as newEventAction } from './components/NewEventPage';
+import NewEventPage from './components/NewEventPage';
 import EditEventPage from './components/EditEventPage';
 import EventDetailPage from './components/EventDetailPage';
 import EventRootLayout from './components/EventRootLayout';
@@ -13,6 +13,7 @@ import Error from './components/Error';
 import { loader as eventsLoader } from './components/EventsPage';
 import { loader as eventDetailLoader } from './components/EventDetailPage';
 import { action as eventDeleteAction } from './components/EventDetailPage';
+import { action as manipulateEventAction } from './components/EventForm';
 
 
 // Challenge / Exercise
@@ -49,13 +50,13 @@ const router = createBrowserRouter([
         {path: 'events', element: <EventRootLayout />,
         children: [
 			{index: true, element: <EventsPage />, loader: eventsLoader},
-			{path: 'new', element: <NewEventPage />, action: newEventAction},
+			{path: 'new', element: <NewEventPage />, action: manipulateEventAction},
 			// Edit page needs the same event data as detail page. Make the 2 routes as children of id route,
 			// so no need to write another loader function, loader can be used in all child routes
-      		{path: ':id', id: 'event-detail', loader: eventDetailLoader,
+      {path: ':id', id: 'event-detail', loader: eventDetailLoader,
 			children: [
 				{index: true, element: <EventDetailPage />, action: eventDeleteAction},
-				{path: 'edit', element: <EditEventPage />}
+				{path: 'edit', element: <EditEventPage />, action: manipulateEventAction}
 			]}
         ]}
     ]}

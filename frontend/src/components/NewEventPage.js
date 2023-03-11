@@ -3,12 +3,12 @@ import { redirect } from 'react-router-dom';
 import EventForm from './EventForm';
 
 const NewEventPage = () => {
-    return <EventForm />
+    return <EventForm method='POST' />
 }
 
 export default NewEventPage;
 
-// to use get() on fields, inside Form every inputs must have the "name" attribute with the same name as here - title, image, date, description
+/* // to use get() on fields, inside Form every inputs must have the "name" attribute with the same name as here - title, image, date, description
 export const action = async ({ request, params }) => {
     const data = await request.formData();
 
@@ -37,4 +37,4 @@ export const action = async ({ request, params }) => {
     }
 
     return redirect('/events');
-}
+} */

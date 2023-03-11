@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Form, useNavigate, useNavigation, useActionData } from 'react-router-dom';
+import { Form, useNavigate, useNavigation, useActionData, redirect } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
@@ -16,7 +16,7 @@ function EventForm({ method, event }) {
 
   // react-router Form behaves like form, but sending date to our action instead of the backend, so action can process the data
   return (
-    <Form method='POST' className={classes.form}>
+    <Form method={method} className={classes.form}>
       {actionData && actionData.errors && <ul>
         {Object.values(actionData.errors).map(err => (
           <li key={err}> {err.message}</li>
@@ -50,3 +50,44 @@ function EventForm({ method, event }) {
 }
 
 export default EventForm;
+
+// to use get() on fields, inside Form every inputs must have the "name" attribute with the same name as here - title, image, date, description
+// same action for New and Edit event based if request method is post or patch
+export const action = async ({ request, params }) => {
+  const data = await request.formData();
+  const method = request.method;
+
+  const formData = {
+      title: data.get('title'),
+      image: data.get('image'),
+      date: data.get('date'),
+      description: data.get('description')
+  }
+
+  let url = 'http://localhost:8081/events';
+
+  if(method === 'PATCH') {
+      const id = params.id;
+
+	  url = 'http://localhost:8081/events/' + id;
+  }
+
+  const response = await fetch(url, {
+      method: method,
+      body: JSON.stringify(formData),
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  });
+
+  // events.js returns a 422 error if any validation error occurs, which can be accessed in action
+  if(request.status === 422) {
+      return response;
+  }
+
+  if(!response.ok) {
+      throw new Error({ message: JSON.stringify('Could not create new event.') }, { status: 500 }); 
+  }
+
+  return redirect('/events');
+}
