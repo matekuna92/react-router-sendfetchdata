@@ -1,12 +1,13 @@
 import React from 'react';
 
-import { Form, useNavigate, useNavigation } from 'react-router-dom';
+import { Form, useNavigate, useNavigation, useActionData } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
 function EventForm({ method, event }) {
   const navigate = useNavigate();
   const navigation = useNavigation();
+  const actionData = useActionData();
   const isSubmitting = navigation.state === 'submitting';
 
   function cancelHandler() {
@@ -16,6 +17,12 @@ function EventForm({ method, event }) {
   // react-router Form behaves like form, but sending date to our action instead of the backend, so action can process the data
   return (
     <Form method='POST' className={classes.form}>
+      {actionData && actionData.errors && <ul>
+        {Object.values(actionData.errors).map(err => (
+          <li key={err}> {err.message}</li>
+        ))}
+      </ul>}
+
       <p>
         <label htmlFor="title">Title</label>
         <input id="title" type="text" name="title" required defaultValue={event ? event.title : ''} />

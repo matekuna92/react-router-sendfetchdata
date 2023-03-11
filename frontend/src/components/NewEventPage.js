@@ -27,6 +27,11 @@ export const action = async ({ request, params }) => {
         }
     });
 
+    // events.js returns a 422 error if any validation error occurs, which can be accessed in action
+    if(request.status === 422) {
+        return response;
+    }
+
     if(!response.ok) {
         throw new Error({ message: JSON.stringify('Could not create new event.') }, { status: 500 }); 
     }
