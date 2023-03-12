@@ -14,7 +14,7 @@ import { loader as eventsLoader } from './components/EventsPage';
 import { loader as eventDetailLoader } from './components/EventDetailPage';
 import { action as eventDeleteAction } from './components/EventDetailPage';
 import { action as manipulateEventAction } from './components/EventForm';
-import NewsLetter from './components/NewsLetter';
+import NewsLetter, { action as newsLetterAction } from './components/NewsLetter';
 
 
 // Challenge / Exercise
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
 				{path: 'edit', element: <EditEventPage />, action: manipulateEventAction}
             ]},
         ]},
-	{path: 'newsletter', element: <NewsLetter />}
+	{path: 'newsletter', element: <NewsLetter />, action: newsLetterAction}
     ]}
 ]);
 

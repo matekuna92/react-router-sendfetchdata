@@ -11,3 +11,7 @@ const NewsLetter = () => {
 }   
 
 export default NewsLetter;
+
+export const action = async ({ request, params }) => {
+   console.log('request:', request);
+}
