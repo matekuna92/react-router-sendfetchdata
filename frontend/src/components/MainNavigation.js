@@ -3,6 +3,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import classes from './MainNavigation.module.css';
+import NewsLetterSignup from './NewsLetterSignup';
 
 const MainNavigation = () => {
   return (
@@ -20,6 +21,7 @@ const MainNavigation = () => {
           </li>
         </ul>
       </nav>
+      <NewsLetterSignup />
     </header>
   );
 }
