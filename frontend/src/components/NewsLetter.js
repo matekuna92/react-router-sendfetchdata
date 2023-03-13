@@ -13,5 +13,8 @@ const NewsLetter = () => {
 export default NewsLetter;
 
 export const action = async ({ request, params }) => {
-   console.log('request:', request);
+    const data = await request.formData();
+    const email = data.get('email');        // name='email' attribute required on Form element to access here
+    console.log('email: ', email);
+    return { message: 'Signup successful!' };   // *
 }
