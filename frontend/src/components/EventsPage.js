@@ -37,9 +37,10 @@ const loadEvents = async () => {
       throw new Response(JSON.stringify({ message: 'Could not fetch events.'}), { status: 500 });
     }
     else {
-      //  const data = await response.json();
-      //  return data.events;			// returned value in loader can be accessable in other components
-         return response.json().events;         // react-router supports returning the response without extracting manually
+        //  return data.events;			// returned value in loader can be accessable in other components
+        const responseData = await response.json();
+        return responseData.events;       // return response; was working when loader directly got response,
+                                          // now it has to be manually parsed, because we are using defer instead of direct call
     } 
 }
 
