@@ -15,6 +15,7 @@ import { loader as eventDetailLoader } from './components/EventDetailPage';
 import { action as eventDeleteAction } from './components/EventDetailPage';
 import { action as manipulateEventAction } from './components/EventForm';
 import NewsLetter, { action as newsLetterAction } from './components/NewsLetter';
+import Authentication from './components/Authentication';
 
 
 // Challenge / Exercise
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
 				{path: 'edit', element: <EditEventPage />, action: manipulateEventAction}
             ]},
         ]},
+    {path: '/auth', element: <Authentication />},
 	{path: 'newsletter', element: <NewsLetter />, action: newsLetterAction}
     ]}
 ]);
