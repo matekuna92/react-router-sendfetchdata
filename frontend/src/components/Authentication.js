@@ -10,7 +10,7 @@ const AuthenticationPage = () => {
 export default AuthenticationPage;
 
 export const action = async ({ request }) => {
-    // useParams hook cant be used inside action, only inside components
+    // useSearchParams hook cant be used inside action, only inside components
     const searchParams = new URL(request.url).searchParams;
     const mode = searchParams.get('mode') || 'login';   // login as default if undefined
     const formData = await request.formData();
@@ -19,8 +19,17 @@ export const action = async ({ request }) => {
         password: formData.get('password')
     }
 
+    console.log('authData: ', authData);
+    console.log('mode:', mode);
+    console.log("mode === 'login'", mode === 'login');
+
+    if(mode !== 'login' || mode !== 'signup') {
+        console.log('unsupported mode.');
+        throw json({ message: 'Unsupported mode.', status: 422 });
+    }
+
     // send request to backend  
-    const response = fetch('/http://localhost:8081/' + mode, {
+    const response = await fetch('http://localhost:8081/' + mode, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -29,10 +38,12 @@ export const action = async ({ request }) => {
     });
 
     if(response.status === 422 || response.status === 401) {
+        console.log('422 or 401');
         return response;
     }
 
     if(!response.ok) {
+        console.log('could not authenticate user, error 500');
         throw json({ message: 'Could not authenticate user', status: 500 });
     }
 

@@ -9,7 +9,7 @@ const AuthForm = () => {
 
   return (
     <>
-        <Form method="POST" className={classes.form}>
+        <Form method='POST' className={classes.form}>
             <h1>{isLogin ? 'Login' : 'Create new user'}</h1>
 
             <p>
@@ -23,7 +23,7 @@ const AuthForm = () => {
 
             <div className={classes.actions}>
                 <Link to={`?mode=${isLogin ? 'signup' : 'login'}`}>{isLogin ? 'Create new user' : 'Login'}</Link>
-                <button type='button'>Save</button>
+                <button>Save</button>
             </div>
         </Form>
     </>
