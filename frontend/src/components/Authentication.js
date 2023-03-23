@@ -39,6 +39,8 @@ export const action = async ({ request }) => {
         return response;
     }
 
+    console.log('response hiba előtt: ', response, response.status);
+
     if(!response.ok) {
         console.log('could not authenticate user, error 500');
         throw json({ message: 'Could not authenticate user', status: 500 });
