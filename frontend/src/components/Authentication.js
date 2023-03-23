@@ -11,8 +11,10 @@ export default AuthenticationPage;
 
 export const action = async ({ request }) => {
     // useSearchParams hook cant be used inside action, only inside components
-    const searchParams = new URL(request.url).searchParams;
-    const mode = searchParams.get('mode') || 'login';   // login as default if undefined
+    const searchParams = new URLSearchParams(request.url);
+    console.log('searchParams: ', searchParams);
+
+    const mode = searchParams.entries().next().value[1] || 'login';     // login as default if undefined  
     const formData = await request.formData();
     const authData = {
         email: formData.get('email'),
@@ -22,11 +24,6 @@ export const action = async ({ request }) => {
     console.log('authData: ', authData);
     console.log('mode:', mode);
     console.log("mode === 'login'", mode === 'login');
-
-    if(mode !== 'login' || mode !== 'signup') {
-        console.log('unsupported mode.');
-        throw json({ message: 'Unsupported mode.', status: 422 });
-    }
 
     // send request to backend  
     const response = await fetch('http://localhost:8081/' + mode, {
