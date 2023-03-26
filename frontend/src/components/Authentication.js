@@ -29,10 +29,12 @@ export const action = async ({ request }) => {
     const response = await fetch('http://localhost:8081/' + mode, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'credentials': 'same-origin'
         },
         body: JSON.stringify(authData)
-    });
+    })
+    .catch(err => console.warn('err:', err));
 
     if(response.status === 422 || response.status === 401) {
         console.log('422 or 401');
