@@ -17,6 +17,7 @@ import { action as manipulateEventAction } from './components/EventForm';
 import NewsLetter, { action as newsLetterAction } from './components/NewsLetter';
 import Authentication from './components/Authentication';
 import { action as userAuthAction } from './components/Authentication';
+import { action as logoutAction } from './components/Logout';
 
 
 // Challenge / Exercise
@@ -63,7 +64,8 @@ const router = createBrowserRouter([
             ]},
         ]},
     {path: '/auth', element: <Authentication />, action: userAuthAction},
-	{path: 'newsletter', element: <NewsLetter />, action: newsLetterAction}
+	{path: 'newsletter', element: <NewsLetter />, action: newsLetterAction},
+    {path: 'logout', action: logoutAction}
     ]}
 ]);
 
