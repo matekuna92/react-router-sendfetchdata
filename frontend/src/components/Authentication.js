@@ -30,7 +30,7 @@ export const action = async ({ request }) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'credentials': 'same-origin'
+          //  'credentials': 'same-origin'
         },
         body: JSON.stringify(authData)
     })

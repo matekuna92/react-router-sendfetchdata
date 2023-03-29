@@ -16,13 +16,13 @@ const AuthForm = () => {
     <>
         <Form method='POST' className={classes.form}>
             <h1>{isLogin ? 'Login' : 'Create new user'}</h1>
-            {data && data.errors && <ul>
+            {data && data.errors && (<ul>
                 {Object.values(data.errors).map(err => (
-                    <li key={err}>{err}</li>
-                ))}
-            </ul>}
+                        <li key={err}>{err}</li>
+                        ))}
+            </ul>)}
 
-            {data && data.messages && <p>{data.message}</p>}
+            {data && data.message && <p className={classes.error}>{data.message}</p>}
             
             <p>
                 <label htmlFor='email'>Email</label>
