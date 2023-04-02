@@ -3,7 +3,7 @@ import React from 'react';
 import { Form, useNavigate, useNavigation, useActionData, redirect } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
-import {getAuthToken} from "../util/authToken";
+import { getAuthToken } from "../util/authToken";
 
 function EventForm({ method, event }) {
   const navigate = useNavigate();

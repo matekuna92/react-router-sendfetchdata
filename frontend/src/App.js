@@ -18,6 +18,7 @@ import NewsLetter, { action as newsLetterAction } from './components/NewsLetter'
 import Authentication from './components/Authentication';
 import { action as userAuthAction } from './components/Authentication';
 import { action as logoutAction } from './components/Logout';
+import { loadToken as tokenLoader } from './util/authToken';
 
 
 // Challenge / Exercise
@@ -47,6 +48,9 @@ import { action as logoutAction } from './components/Logout';
 // that's the closest errorElement which will be displayed
 const router = createBrowserRouter([
     {path: '/', element: <RootLayout />,
+    // get token on root path, so all subroutes can also access the logged in/off status
+    loader: tokenLoader,
+    id: 'root',    
     errorElement: <Error />,
     children: [
         {index: true, element: <HomePage />},
