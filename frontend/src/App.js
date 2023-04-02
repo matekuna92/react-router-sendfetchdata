@@ -18,7 +18,7 @@ import NewsLetter, { action as newsLetterAction } from './components/NewsLetter'
 import Authentication from './components/Authentication';
 import { action as userAuthAction } from './components/Authentication';
 import { action as logoutAction } from './components/Logout';
-import { loadToken as tokenLoader } from './util/authToken';
+import { checkAuthLoader, loadToken as tokenLoader } from './util/authToken';
 
 
 // Challenge / Exercise
@@ -58,13 +58,13 @@ const router = createBrowserRouter([
         {path: 'events', element: <EventRootLayout />,
         children: [
             {index: true, element: <EventsPage />, loader: eventsLoader},
-            {path: 'new', element: <NewEventPage />, action: manipulateEventAction},
+            {path: 'new', element: <NewEventPage />, action: manipulateEventAction, loader: checkAuthLoader},
             // Edit page needs the same event data as detail page. Make the 2 routes as children of id route,
             // so no need to write another loader function, loader can be used in all child routes
             {path: ':id', id: 'event-detail', loader: eventDetailLoader,
             children: [
 				{index: true, element: <EventDetailPage />, action: eventDeleteAction},
-				{path: 'edit', element: <EditEventPage />, action: manipulateEventAction}
+				{path: 'edit', element: <EditEventPage />, action: manipulateEventAction, loader: checkAuthLoader}
             ]},
         ]},
     {path: '/auth', element: <Authentication />, action: userAuthAction},
